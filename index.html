@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"
+    integrity="sha512-        8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+  <title>Placar IFPA</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Estilo do sistema -->
+  <style>
+    body {
+      background-color: #f5f6fa;
+    }
+
+    .navbar {
+      background-color: #5b21b6 !important;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+    }
+
+    .botoes-acesso {
+      display: flex;
+      gap: 8px;
+    }
+
+    .botao-acesso {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-weight: 500;
+    }
+
+    .modalidades {
+      background-color: white;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 20px;
+    }
+
+    .modalidades .dropdown-menu {
+      min-width: 220px;
+    }
+
+    .conteudo {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .titulo-secao {
+      color: #5b21b6;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .jogo {
+      background-color: white;
+      border: 1px solid #e1ddec;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .modalidade-jogo {
+      color: #5b21b6;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .partida {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .time {
+      font-weight: bold;
+      min-width: 120px;
+    }
+
+    .placar {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .ao-vivo {
+      color: #dc2626;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .agendado {
+      color: #666;
+      text-align: center;
+      margin-top: 15px;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 576px) {
+
+      .botoes-acesso {
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      .botao-acesso {
+        flex: 1;
+      }
+
+      .partida {
+        gap: 10px;
+      }
+
+      .time {
+        min-width: 80px;
+      }
+
+      .placar {
+        font-size: 20px;
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+  <!--BARRA PRINCIPAL -->
+
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid">
+
+      <!-- Nome do sistema -->
+      <a class="navbar-brand" href="index.html">
+        🏆 Placar IFPA
+      </a>
+
+      <!-- Botões de acesso -->
+      <div class="botoes-acesso">
+        <button class="botao-acesso btn-light" type="button">
+          Admin
+        </button>
+
+        <button class="botao-acesso btn-light" type="button">
+          Org
+        </button>
+
+        <button class="botao-acesso btn-light" type="button">
+          👁 Vista
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!--BARRA INICIAL PRINCIPAL -->
+
+
+
+  <!--MENU DE MODALIDADES -->
+  <div class="dropdown">
+
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+
+      Modalidades
+    </button>
+
+
+    <!-- Lista de modalidades -->
+
+    <ul class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" href="#">
+          Futsal
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Handebol
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Basquete
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Voleibol
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Vôlei de Praia
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Fut 7
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Queimada
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Dominó
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Tênis de Mesa
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Cubo Mágico
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Atletismo - Corrida
+        </a>
+      </li>
+
+      <li>
+        <a class="dropdown-item" href="#">
+          Atletismo - Salto
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  </div>
+
+  <!-- FIM MENU DE MODALIDADES -->
+
+  <!-- Botão Jogos -->
+  <button class="btn btn-outline-secondary" type="button">
+
+    Jogos
+
+  </button>
+  </div>
+
+
+
+  <!--CONTEÚDO PRINCIPAL -->
+
+  <main class="conteudo">
+
+
+    <!--JOGOS AO VIVO -->
+
+    <section id="aovivo">
+
+      <img src="imagens/carregando.webp" alt="Descrição da foto" width="100">
+
+    </section>
+
+    <!-- FIM JOGOS AO VIVO -->
+
+
+
+    <!-- INÍCIO JOGOS AGENDADOS -->
+
+    <section>
+
+      <h3 class="titulo-secao">
+        AGENDADOS
+      </h3>
+
+
+      <!-- Primeiro jogo agendado -->
+
+      <div class="jogo">
+
+        <div class="modalidade-jogo">
+          Futsal
+        </div>
+
+
+        <div class="partida">
+          <div class="time">
+            Time B
+          </div>
+
+          <div class="placar">
+            ×
+          </div>
+
+          <div class="time">
+            Time A
+          </div>
+
+        </div>
+
+        <p class="agendado">
+          15/08/2026 - 09:00
+        </p>
+      </div>
+
+
+
+      <!-- Segundo jogo agendado -->
+
+      <div class="jogo">
+
+        <div class="modalidade-jogo">
+          Handebol
+        </div>
+
+        <div class="partida">
+
+          <div class="time">
+            Time A
+          </div>
+
+          <div class="placar">
+            ×
+          </div>
+
+          <div class="time">
+            Time C
+          </div>
+        </div>
+
+
+        <p class="agendado">
+          16/08/2026 - 15:00
+        </p>
+
+      </div>
+
+
+
+      <!-- Terceiro jogo agendado -->
+
+      <div class="jogo">
+
+        <div class="modalidade-jogo">
+          Basquete
+        </div>
+
+
+        <div class="partida">
+
+          <div class="time">
+            Time C
+          </div>
+
+          <div class="placar">
+            ×
+          </div>
+
+          <div class="time">
+            Time B
+          </div>
+
+        </div>
+
+
+        <p class="agendado">
+          17/08/2026 - 14:00
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- FIM JOGOS AGENDADOS -->
+
+
+  </main>
+
+
+  <!-- Bootstrap JavaScript -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <script>
+    $(document).ready(function () {
+
+      $.ajax({
+        url: "endpoint.php",
+        type: 'GET',
+        data: {'op': "jogosaovivo"},
+        dataType: 'json',
+        success: function (responta) {
+           const element = document.getElementById("aovivo");
+          element.innerHTML = '<h3 class="titulo-secao">AO VIVO</h3>sem jogos';
+          console.log("Dados salvos com sucesso:", responta);
+        },
+        error: function () {
+          console.error("Erro na requisição:");
+          const element = document.getElementById("aovivo");
+          element.innerHTML = '<h3 class="titulo-secao">AO VIVO</h3>sem jogos';
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
