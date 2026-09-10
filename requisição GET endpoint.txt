@@ -1,0 +1,39 @@
+requisição: GET / endpoint.php
+parametros: [
+	op = 'jogosAgendados'
+]
+resposta: [
+	jogo.id,
+	jogo.modalidade,
+	jogo.time_casa,
+	jogo.time_fora,
+	jogo.data_hora
+]
+
+requisição: GET endpoint.php
+parametros: [
+	op = 'jogosAovivo'
+]
+resposta: [
+	jogo.id,
+	jogo.modalidade,
+	jogo.time_casa,
+	jogo.time_fora,
+	jogo.data_hora
+]
+
+requisição: GET endpoint.php
+parametros: [
+	op = 'jogo',
+	id = idJogo
+]
+resposta:
+	jogo.id,
+	jogo.modalidade,
+	jogo.time_casa,
+	jogo.pontos_time_casa,
+	jogo.time_fora,
+	jogo.pontos_time_fora,
+	jogo.encerrado,
+	jogo.data_hora
+

@@ -277,11 +277,11 @@
 
 
     <!--JOGOS AO VIVO -->
-
-    <section id="aovivo">
-
-      <img src="imagens/carregando.webp" alt="Descrição da foto" width="100">
-
+    <h3 class="titulo-secao">
+      AO VIVO
+    </h3>
+    <section id="jogosAovivo">
+      <p>Carregando jogos...</p>
     </section>
 
     <!-- FIM JOGOS AO VIVO -->
@@ -289,109 +289,11 @@
 
 
     <!-- INÍCIO JOGOS AGENDADOS -->
-
-    <section>
-
-      <h3 class="titulo-secao">
-        AGENDADOS
-      </h3>
-
-
-      <!-- Primeiro jogo agendado -->
-
-      <div class="jogo">
-
-        <div class="modalidade-jogo">
-          Futsal
-        </div>
-
-
-        <div class="partida">
-          <div class="time">
-            Time B
-          </div>
-
-          <div class="placar">
-            ×
-          </div>
-
-          <div class="time">
-            Time A
-          </div>
-
-        </div>
-
-        <p class="agendado">
-          15/08/2026 - 09:00
-        </p>
-      </div>
-
-
-
-      <!-- Segundo jogo agendado -->
-
-      <div class="jogo">
-
-        <div class="modalidade-jogo">
-          Handebol
-        </div>
-
-        <div class="partida">
-
-          <div class="time">
-            Time A
-          </div>
-
-          <div class="placar">
-            ×
-          </div>
-
-          <div class="time">
-            Time C
-          </div>
-        </div>
-
-
-        <p class="agendado">
-          16/08/2026 - 15:00
-        </p>
-
-      </div>
-
-
-
-      <!-- Terceiro jogo agendado -->
-
-      <div class="jogo">
-
-        <div class="modalidade-jogo">
-          Basquete
-        </div>
-
-
-        <div class="partida">
-
-          <div class="time">
-            Time C
-          </div>
-
-          <div class="placar">
-            ×
-          </div>
-
-          <div class="time">
-            Time B
-          </div>
-
-        </div>
-
-
-        <p class="agendado">
-          17/08/2026 - 14:00
-        </p>
-
-      </div>
-
+    <h3 class="titulo-secao">
+      AGENDADOS
+    </h3>
+    <section id="jogosAgendados">
+      <p>Carregando jogos...</p>
     </section>
 
     <!-- FIM JOGOS AGENDADOS -->
@@ -411,17 +313,38 @@
       $.ajax({
         url: "endpoint.php",
         type: 'GET',
-        data: {'op': "jogosaovivo"},
+        data: {'op': 'jogosAgendados'},
         dataType: 'json',
-        success: function (responta) {
-           const element = document.getElementById("aovivo");
-          element.innerHTML = '<h3 class="titulo-secao">AO VIVO</h3>sem jogos';
-          console.log("Dados salvos com sucesso:", responta);
+        success: function (resposta) {
+          console.log("Dados salvos com sucesso:", resposta);
+          $("#jogosAgendados").html("");
+          resposta.forEach((jogo, indice) => {
+            console.log(`${indice}: ${jogo.idJogo}`);
+            $("#jogosAgendados").append('<div class="jogo"><div class="modalidade-jogo">' + jogo.modalidade + '</div><div class="partida"><div class="time">' + jogo.time_casa + '</div><div class="placar">×</div><div class="time">' + jogo.time_fora + '</div></div><p class="agendado">' + jogo.data_hora + '</p></div>');
+          });
         },
         error: function () {
           console.error("Erro na requisição:");
-          const element = document.getElementById("aovivo");
-          element.innerHTML = '<h3 class="titulo-secao">AO VIVO</h3>sem jogos';
+          $("#jogosAgendados").html("Desculpe houve um erro da EQUIPE DE BACK-END, briga com eles...");
+        }
+      });
+
+      $.ajax({
+        url: "endpoint.php",
+        type: 'GET',
+        data: {'op': 'jogosAovivo'},
+        dataType: 'json',
+        success: function (resposta) {
+          console.log("Dados salvos com sucesso:", resposta);
+          $("#jogosAovivo").html("");
+          resposta.forEach((jogo, indice) => {
+            console.log(`${indice}: ${jogo.idJogo}`);
+            $("#jogosAovivo").append('<div class="jogo"><div class="modalidade-jogo">' + jogo.modalidade + '</div><div class="partida"><div class="time">' + jogo.time_casa + '</div><div class="placar">×</div><div class="time">' + jogo.time_fora + '</div></div><p class="agendado">' + jogo.data_hora + '</p></div>');
+          });
+        },
+        error: function () {
+          console.error("Erro na requisição:");
+          $("#jogosAovivo").html("Desculpe houve um erro da EQUIPE DE BACK-END, briga com eles...");
         }
       });
     });

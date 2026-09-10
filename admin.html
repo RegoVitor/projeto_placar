@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"
+        integrity="sha512-        8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Placar IFPA</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilo do sistema -->
+    <style>
+        body {
+            background-color: #f5f6fa;
+        }
+
+        .navbar {
+            background-color: #5b21b6 !important;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        .botoes-acesso {
+            display: flex;
+            gap: 8px;
+        }
+
+        .botao-acesso {
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-weight: 500;
+        }
+
+        .modalidades {
+            background-color: white;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 20px;
+        }
+
+        .modalidades .dropdown-menu {
+            min-width: 220px;
+        }
+
+        .conteudo {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .titulo-secao {
+            color: #5b21b6;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .jogo {
+            background-color: white;
+            border: 1px solid #e1ddec;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modalidade-jogo {
+            color: #5b21b6;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .partida {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .time {
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        .placar {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .ao-vivo {
+            color: #dc2626;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .agendado {
+            color: #666;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 0;
+        }
+
+        .btn-red {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .btn-outline-roxo {
+            color: #5b21b6;
+            border: 1px solid #5b21b6;
+            margin-left: 950px;
+            margin-top: -80px;
+
+
+        }
+
+        .btn-outline-roxo.btn-excluir {
+            color: #5b21b6;
+            border: 1px solid #5b21b6;
+            transform: translate(0px, 100px);
+        }
+
+        .btn-outline-roxo.btn-excluir:hover {
+            color: white;
+            background-color: #5b21b6;
+            border-color: #5b21b6;
+        }
+
+
+
+        .btn-outline-roxo:hover {
+            color: white;
+            background-color: #5b21b6;
+            border-color: #5b21b6;
+        }
+
+        @media (max-width: 576px) {
+
+            .botoes-acesso {
+                margin-top: 10px;
+                width: 100%;
+            }
+
+            .botao-acesso {
+                flex: 1;
+            }
+
+            .partida {
+                gap: 10px;
+            }
+
+            .time {
+                min-width: 80px;
+            }
+
+            .placar {
+                font-size: 20px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!--BARRA PRINCIPAL -->
+
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+
+            <!-- Nome do sistema -->
+            <a class="navbar-brand" href="index.html">
+                🏆 Placar IFPA
+            </a>
+
+            <!-- Botões de acesso -->
+            <div class="botoes-acesso">
+                <button class="botao-acesso btn-red" type="button">
+                    Admin
+                </button>
+
+                <button class="botao-acesso btn-light" type="button">
+                    Org
+                </button>
+
+                <button class="botao-acesso btn-light" type="button">
+                    👁 Vista
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!--BARRA INICIAL PRINCIPAL -->
+
+
+
+    <!--MENU DE MODALIDADES -->
+    <div class="dropdown">
+
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+
+            Modalidades
+        </button>
+
+
+        <!-- Lista de modalidades -->
+
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="#">
+                    Futsal
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Handebol
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Basquete
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Voleibol
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Vôlei de Praia
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Fut 7
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Queimada
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Dominó
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Tênis de Mesa
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Cubo Mágico
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Atletismo - Corrida
+                </a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="#">
+                    Atletismo - Salto
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    </div>
+
+    <!-- FIM MENU DE MODALIDADES -->
+
+    <!-- Botão Jogos -->
+    <button class="btn btn-outline-secondary" type="button">
+
+        Jogos
+
+    </button>
+    </div>
+
+
+
+    <!--CONTEÚDO PRINCIPAL -->
+
+    <main class="conteudo">
+
+
+        <!--JOGOS AO VIVO -->
+
+        <section id="aovivo">
+  
+
+        </section>
+
+        <!-- FIM JOGOS AO VIVO -->
+
+
+
+        <!-- INÍCIO JOGOS AGENDADOS -->
+
+        <section>
+
+            <h3 class="titulo-secao">
+                AGENDADOS
+            </h3>
+
+
+            <!-- Primeiro jogo agendado -->
+
+            <div class="jogo">
+
+                <div id="modalidade1" class="modalidade-jogo">
+                    Futsal
+                </div>
+
+                <button id="botaoEditar" type="button" class="btn btn-outline-roxo"
+                    onclick="editarJogo()">Editar</button>
+
+
+                <div id="time1" class="partida">
+                    <div class="time">
+                        Time B
+                    </div>
+
+                    <div class="placar">
+                        ×
+                    </div>
+
+                    <div id="time2" class="time">
+                        Time A
+                    </div>
+
+                </div>
+
+                <p id="data1" class="agendado">
+                    15/08/2026 - 09:00
+                </p>
+            </div>
+
+
+
+            <!-- Segundo jogo agendado -->
+
+            <div class="jogo">
+
+                <div id="modalidade2" class="modalidade-jogo">
+                    Handebol
+                </div>
+
+                <button id="botaoEditar2" type="button" class="btn btn-outline-roxo"
+                    onclick="editarJogo2()">Editar</button>
+
+                <div class="partida">
+
+                    <div id="time3" class="time">
+                        Time A
+                    </div>
+
+                    <div class="placar">
+                        ×
+                    </div>
+
+                    <div id="time4" class="time">
+                        Time C
+                    </div>
+                </div>
+
+
+                <p id="data2" class="agendado">
+                    16/08/2026 - 15:00
+                </p>
+
+            </div>
+
+
+
+            <!-- Terceiro jogo agendado -->
+
+            <div class="jogo">
+
+                <div id="modalidade3" class="modalidade-jogo" contenteditable="false">
+                    Basquete
+                </div>
+
+                <button id="botaoEditar3" type="button" class="btn btn-outline-roxo"
+                    onclick="editarJogo3()">Editar</button>
+
+
+                <div class="partida">
+
+                    <div id="time5" class="time" contenteditable="false">
+                        Time C
+                    </div>
+
+                    <div class="placar">
+                        ×
+                    </div>
+
+                    <div id="time6" class="time" contenteditable="false">
+                        Time B
+                    </div>
+
+                </div>
+
+
+                <p id="data3" class="agendado" contenteditable="false">
+                    17/08/2026 - 14:00
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- FIM JOGOS AGENDADOS -->
+
+
+    </main>
+
+    <script>
+
+        function editarJogo() {
+
+            let botao = document.getElementById("botaoEditar");
+
+            if (botao.innerText == "Editar") {
+
+                document.getElementById("modalidade1").contentEditable = true;
+                document.getElementById("time1").contentEditable = true;
+                document.getElementById("time2").contentEditable = true;
+                document.getElementById("data1").contentEditable = true;
+
+                botao.innerText = "Salvar";
+
+            } else {
+
+                document.getElementById("modalidade1").contentEditable = false;
+                document.getElementById("time1").contentEditable = false;
+                document.getElementById("time2").contentEditable = false;
+                document.getElementById("data1").contentEditable = false;
+
+                botao.innerText = "Editar";
+
+            }
+
+        }
+
+        function editarJogo2() {
+
+            let botao = document.getElementById("botaoEditar2");
+
+            if (botao.innerText == "Editar") {
+
+                document.getElementById("modalidade2").contentEditable = true;
+                document.getElementById("time3").contentEditable = true;
+                document.getElementById("time4").contentEditable = true;
+                document.getElementById("data2").contentEditable = true;
+
+                botao.innerText = "Salvar";
+
+            } else {
+
+                document.getElementById("modalidade2").contentEditable = false;
+                document.getElementById("time3").contentEditable = false;
+                document.getElementById("time4").contentEditable = false;
+                document.getElementById("data2").contentEditable = false;
+
+                botao.innerText = "Editar";
+
+            }
+        }
+
+
+        function editarJogo3() {
+
+            let botao = document.getElementById("botaoEditar3");
+
+            if (botao.innerText == "Editar") {
+
+                document.getElementById("modalidade3").contentEditable = true;
+                document.getElementById("time5").contentEditable = true;
+                document.getElementById("time6").contentEditable = true;
+                document.getElementById("data3").contentEditable = true;
+
+                botao.innerText = "Salvar";
+
+            } else {
+
+                document.getElementById("modalidade3").contentEditable = false;
+                document.getElementById("time5").contentEditable = false;
+                document.getElementById("time6").contentEditable = false;
+                document.getElementById("data3").contentEditable = false;
+
+                botao.innerText = "Editar";
+
+            }
+
+        }
+
+    </script>
