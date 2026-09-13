@@ -29,28 +29,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 ON c.Modalidade_idModalidade = m.idModalidade ";
     } elseif (isset($_GET["op"]) && $_GET["op"] == "jogosAovivo") {
         $sql = "SELECT
-    j.inicio AS data_hora, 
-    tc.nome_time AS time_casa, 
-    tf.nome_time AS time_fora,
-    CONCAT(m.nome_modalidade, ' ', m.sexo) AS modalidade
+            j.inicio AS data_hora, 
+            tc.nome_time AS time_casa, 
+            tf.nome_time AS time_fora,
+            CONCAT(m.nome_modalidade, ' ', m.sexo) AS modalidade
 
-FROM jogo j
+        FROM jogo j
 
-INNER JOIN time tc 
-    ON j.Time_casa_id = tc.idTime
+        INNER JOIN time tc 
+            ON j.Time_casa_id = tc.idTime
 
-INNER JOIN time tf 
-    ON j.Time_fora_id = tf.idTime
+        INNER JOIN time tf 
+            ON j.Time_fora_id = tf.idTime
 
-INNER JOIN chave c 
-    ON tc.Chave_idChaveamento = c.idChaveamento
+        INNER JOIN chave c 
+            ON tc.Chave_idChaveamento = c.idChaveamento
 
-INNER JOIN modalidade m 
-    ON c.Modalidade_idModalidade = m.idModalidade
+        INNER JOIN modalidade m 
+            ON c.Modalidade_idModalidade = m.idModalidade
 
-WHERE j.idJogo = 5";
-    } else {
-        exit(json_encode(array()));
+        WHERE j.status = 'AO-VIVO'";
+    } elseif (isset($_GET["op"]) && $_GET["op"] == "jogo")  {
+        $idJogo = $_GET['idJogo'];
+        $sql = "SELECT
+            j.inicio AS data_hora, 
+            tc.nome_time AS time_casa, 
+            tf.nome_time AS time_fora,
+            CONCAT(m.nome_modalidade, ' ', m.sexo) AS modalidade
+
+        FROM jogo j
+
+        INNER JOIN time tc 
+            ON j.Time_casa_id = tc.idTime
+
+        INNER JOIN time tf 
+            ON j.Time_fora_id = tf.idTime
+
+        INNER JOIN chave c 
+            ON tc.Chave_idChaveamento = c.idChaveamento
+
+        INNER JOIN modalidade m 
+            ON c.Modalidade_idModalidade = m.idModalidade
+
+        WHERE j.idJogo = $idJogo
+        LIMIT 1";
     }
 
 
