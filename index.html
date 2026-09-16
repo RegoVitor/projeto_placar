@@ -8,8 +8,6 @@
     integrity="sha512-        8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-
   <title>Placar IFPA</title>
 
   <!-- Bootstrap CSS -->
@@ -170,7 +168,6 @@
   <!--BARRA INICIAL PRINCIPAL -->
 
 
-
   <!--MENU DE MODALIDADES -->
   <div class="dropdown">
 
@@ -257,7 +254,6 @@
 
     </ul>
   </div>
-  </div>
 
   <!-- FIM MENU DE MODALIDADES -->
 
@@ -267,8 +263,6 @@
     Jogos
 
   </button>
-  </div>
-
 
 
   <!--CONTEÚDO PRINCIPAL -->
@@ -280,6 +274,7 @@
     <h3 class="titulo-secao">
       AO VIVO
     </h3>
+
     <section id="jogosAovivo">
       <p>Carregando jogos...</p>
     </section>
@@ -287,11 +282,11 @@
     <!-- FIM JOGOS AO VIVO -->
 
 
-
     <!-- INÍCIO JOGOS AGENDADOS -->
     <h3 class="titulo-secao">
       AGENDADOS
     </h3>
+
     <section id="jogosAgendados">
       <p>Carregando jogos...</p>
     </section>
@@ -313,40 +308,136 @@
       $.ajax({
         url: "endpoint.php",
         type: 'GET',
-        data: {'op': 'jogosAgendados'},
+        data: { 'op': 'jogosAgendados' },
         dataType: 'json',
+
         success: function (resposta) {
+
           console.log("Dados salvos com sucesso:", resposta);
+
           $("#jogosAgendados").html("");
+
           resposta.forEach((jogo, indice) => {
+
             console.log(`${indice}: ${jogo.idJogo}`);
-            $("#jogosAgendados").append('<div class="jogo"><div class="modalidade-jogo">' + jogo.modalidade + '</div><div class="partida"><div class="time">' + jogo.time_casa + '</div><div class="placar">×</div><div class="time">' + jogo.time_fora + '</div></div><p class="agendado">' + jogo.data_hora + '</p></div>');
+
+            $("#jogosAgendados").append(
+              '<div class="jogo">' +
+
+              '<div class="modalidade-jogo">' +
+              jogo.modalidade +
+              '</div>' +
+
+              '<div class="partida">' +
+
+              '<img src="' + jogo.img_time_casa +
+              '" width="50" alt="Descrição da imagem">' +
+
+              '<div class="time">' +
+              jogo.time_casa +
+              '</div>' +
+
+              '<div class="placar">' +
+              jogo.pontos_time_casa +
+              ' × ' +
+              jogo.pontos_time_fora +
+              '</div>' +
+
+              '<div class="time">' +
+              jogo.time_fora +
+              '</div>' +
+
+              '<img src="' + jogo.img_time_fora +
+              '" width="50" alt="Descrição da imagem">' +
+
+              '</div>' +
+
+              '<p class="agendado">' +
+              jogo.data_hora +
+              '</p>' +
+
+              '</div>'
+            );
           });
         },
+
         error: function () {
+
           console.error("Erro na requisição:");
-          $("#jogosAgendados").html("Desculpe houve um erro da EQUIPE DE BACK-END, briga com eles...");
+
+          $("#jogosAgendados").html(
+            "Desculpe houve um erro da EQUIPE DE BACK-END, briga com eles..."
+          );
         }
       });
+
 
       $.ajax({
         url: "endpoint.php",
         type: 'GET',
-        data: {'op': 'jogosAovivo'},
+        data: { 'op': 'jogosAovivo' },
         dataType: 'json',
+
         success: function (resposta) {
+
           console.log("Dados salvos com sucesso:", resposta);
+
           $("#jogosAovivo").html("");
+
           resposta.forEach((jogo, indice) => {
+
             console.log(`${indice}: ${jogo.idJogo}`);
-            $("#jogosAovivo").append('<div class="jogo"><div class="modalidade-jogo">' + jogo.modalidade + '</div><div class="partida"><div class="time">' + jogo.time_casa + '</div><div class="placar">×</div><div class="time">' + jogo.time_fora + '</div></div><p class="agendado">' + jogo.data_hora + '</p></div>');
+
+            $("#jogosAovivo").append(
+              '<div class="jogo">' +
+
+              '<div class="modalidade-jogo">' +
+              jogo.modalidade +
+              '</div>' +
+
+              '<div class="partida">' +
+
+              '<img src="' + jogo.img_time_casa +
+              '" width="50" alt="Descrição da imagem">' +
+
+              '<div class="time">' +
+              jogo.time_casa +
+              '</div>' +
+
+              '<div class="placar">' +
+              jogo.pontos_time_casa +
+              ' × ' +
+              jogo.pontos_time_fora +
+              '</div>' +
+
+              '<div class="time">' +
+              jogo.time_fora +
+              '</div>' +
+
+              '<img src="' + jogo.img_time_fora +
+              '" width="50" alt="Descrição da imagem">' +
+
+              '</div>' +
+
+              '<p class="agendado">' +
+              jogo.data_hora +
+              '</p>' +
+
+              '</div>'
+            );
           });
         },
+
         error: function () {
+
           console.error("Erro na requisição:");
-          $("#jogosAovivo").html("Desculpe houve um erro da EQUIPE DE BACK-END, briga com eles...");
+
+          $("#jogosAovivo").html(
+            "Desculpe houve um erro da EQUIPE DE BACK-END, briga com eles..."
+          );
         }
       });
+
     });
   </script>
 

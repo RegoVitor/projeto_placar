@@ -23,7 +23,6 @@
             flex-direction: column;
         }
 
-
         /* ===== CABEÇALHO ===== */
 
         header {
@@ -39,7 +38,6 @@
             font-size: 28px;
         }
 
-        /* BOTÃO VOLTAR */
         .btn-voltar {
             padding: 10px 18px;
             border: none;
@@ -59,24 +57,6 @@
             background: #e6e0f4;
         }
 
-        .menu {
-            display: flex;
-            gap: 12px;
-        }
-
-        .menu button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: white;
-            color: #5b20b8;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-
         /* ===== ÁREA PRINCIPAL ===== */
 
         main {
@@ -93,7 +73,6 @@
             margin-bottom: 25px;
         }
 
-
         /* ===== CARD ===== */
 
         .card {
@@ -102,7 +81,6 @@
             padding: 25px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
         }
-
 
         /* ===== PESQUISA ===== */
 
@@ -141,7 +119,61 @@
             font-size: 20px;
         }
 
+        /* ===== JOGOS ENCONTRADOS ===== */
 
+        #jogosEncontrados {
+            margin-bottom: 25px;
+        }
+
+        .jogo {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fff;
+        }
+
+        .jogo:hover {
+            border-color: #5b20b8;
+            box-shadow: 0 2px 8px rgba(91, 32, 184, 0.15);
+        }
+
+        .modalidade-jogo {
+            color: #5b20b8;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .partida {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .partida img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .time {
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .placar {
+            font-size: 20px;
+            font-weight: bold;
+            color: #5b20b8;
+        }
+
+        .jogo
         /* ===== ÁREA DE PONTUAÇÃO ===== */
 
         .pontuacao {
@@ -178,34 +210,11 @@
             border-color: #5b20b8;
         }
 
-
-        /* ===== STATUS ===== */
-
-        .status {
-            margin-bottom: 25px;
-        }
-
-        .status label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 9px;
-        }
-
-        .status select {
-            width: 100%;
-            padding: 13px;
-            border: 2px solid #ccc;
-            border-radius: 9px;
-            font-size: 16px;
-            background: white;
-        }
-
-
         /* ===== BOTÕES ===== */
 
         .botoes {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 15px;
         }
 
@@ -227,10 +236,13 @@
             background: #d32f2f;
         }
 
+        .iniciar {
+            background: #2e7d32;
+        }
+
         .botoes button:hover {
             opacity: 0.9;
         }
-
 
         /* ===== MENSAGEM ===== */
 
@@ -250,7 +262,6 @@
 
         <h1>🏆 Placar IFPA</h1>
 
-        <!-- BOTÃO VOLTAR -->
         <button class="btn-voltar" onclick="window.location.href='index.html'">
             ← Voltar para a Página Inicial
         </button>
@@ -266,9 +277,7 @@
             PAINEL ADMINISTRATIVO
         </h2>
 
-
         <div class="card">
-
 
             <!-- PESQUISA -->
 
@@ -280,7 +289,7 @@
 
                 <div class="barra-pesquisa">
 
-                    <input type="text" id="pesquisa" placeholder="Digite o nome da turma, modalidade ou jogo...">
+                    <input type="text" id="pesquisa" placeholder="Digite o nome do time..." oninput="buscarJogos()">
 
                     <span class="lupa">
                         🔍
@@ -291,12 +300,14 @@
             </div>
 
 
+            <!-- JOGOS ENCONTRADOS -->
+
+            <div id="jogosEncontrados"></div>
+
+
             <!-- PONTUAÇÃO -->
 
             <div class="pontuacao">
-
-
-                <!-- TIME A -->
 
                 <div class="caixa-time">
 
@@ -308,8 +319,6 @@
 
                 </div>
 
-
-                <!-- TIME B -->
 
                 <div class="caixa-time">
 
@@ -324,36 +333,13 @@
             </div>
 
 
-            <!-- STATUS -->
-
-            <div class="status">
-
-                <label for="statusJogo">
-                    Status do Jogo:
-                </label>
-
-                <select id="statusJogo">
-
-                    <option value="agendado">
-                        Agendado
-                    </option>
-
-                    <option value="andamento">
-                        Em andamento
-                    </option>
-
-                    <option value="finalizado">
-                        Finalizado
-                    </option>
-
-                </select>
-
-            </div>
-
-
             <!-- BOTÕES -->
 
             <div class="botoes">
+
+                <button class="iniciar" onclick="iniciarJogo()">
+                    ▶ Iniciar Jogo
+                </button>
 
                 <button class="atualizar" onclick="atualizarPontos()">
                     Atualizar Pontos
@@ -374,15 +360,225 @@
 
     </main>
 
+
     <footer>
-
-
     </footer>
 
 
     <!-- ===== JAVASCRIPT ===== -->
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <script>
+
+        /* ==========================================
+           JOGO SELECIONADO
+        ========================================== */
+
+        let jogoSelecionado = null;
+
+
+        /* ==========================================
+           BUSCAR JOGOS PELO NOME DO TIME
+        ========================================== */
+
+        function buscarJogos() {
+
+            const nomeTime = $("#pesquisa").val();
+
+            if (nomeTime.trim() === "") {
+
+                $("#jogosEncontrados").html("");
+
+                return;
+            }
+
+
+            $.ajax({
+
+                url: "endpoint.php",
+
+                type: "GET",
+
+                data: {
+
+                    op: "buscarJogosTime",
+
+                    nomeTime: nomeTime
+
+                },
+
+                dataType: "json",
+
+
+                success: function (resposta) {
+
+                    console.log(
+                        "Jogos encontrados:",
+                        resposta
+                    );
+
+
+                    $("#jogosEncontrados").html("");
+
+
+                    resposta.forEach(function (jogo, indice) {
+
+                        console.log(
+                            `${indice}: ${jogo.idJogo}`
+                        );
+
+
+                        $("#jogosEncontrados").append(
+
+                            '<div class="jogo" onclick="selecionarJogo('
+                            + jogo.idJogo +
+                            ')">' +
+
+                            '<div class="modalidade-jogo">' +
+                            jogo.modalidade +
+                            '</div>' +
+
+                            '<div class="partida">' +
+
+                            '<img src="' +
+                            jogo.img_time_casa +
+                            '" width="50">' +
+
+                            '<div class="time">' +
+                            jogo.time_casa +
+                            '</div>' +
+
+                            '<div class="placar">×</div>' +
+
+                            '<div class="time">' +
+                            jogo.time_fora +
+                            '</div>' +
+
+                            '<img src="' +
+                            jogo.img_time_fora +
+                            '" width="50">' +
+
+                            '</div>' +
+
+                            '</div>'
+                        );
+
+                    });
+
+                },
+
+
+                error: function (xhr) {
+
+                    console.error(
+                        "Erro na requisição:",
+                        xhr.responseText
+                    );
+
+
+                    $("#jogosEncontrados").html(
+                        "Erro ao buscar os jogos."
+                    );
+
+                }
+
+            });
+
+        }
+
+        function selecionarJogo(idJogo) {
+
+            jogoSelecionado = idJogo;
+
+
+            console.log(
+                "Jogo selecionado:",
+                idJogo
+            );
+
+
+            $.ajax({
+
+                url: "endpoint.php",
+
+                type: "GET",
+
+                data: {
+
+                    op: "selecionarJogo",
+
+                    idJogo: idJogo
+
+                },
+
+                dataType: "json",
+
+
+                success: function (resposta) {
+
+                    console.log(
+                        "Dados do jogo selecionado:",
+                        resposta
+                    );
+
+
+                    if (resposta.length === 0) {
+
+                        alert(
+                            "Jogo não encontrado."
+                        );
+
+                        return;
+                    }
+
+
+                    const jogo = resposta[0];
+
+
+                    /* PONTOS */
+
+                    $("#pontosA").val(
+                        jogo.pontos_time_casa
+                    );
+
+                    $("#pontosB").val(
+                        jogo.pontos_time_fora
+                    );
+
+
+                    /* HABILITA OS CAMPOS */
+
+                    $("#pontosA").prop(
+                        "disabled",
+                        false
+                    );
+
+                    $("#pontosB").prop(
+                        "disabled",
+                        false
+                    );
+
+
+                    $("#mensagem").text(
+                        "Jogo selecionado."
+                    );
+
+                },
+
+
+                error: function (xhr) {
+
+                    console.error(
+                        "Erro ao selecionar jogo:",
+                        xhr.responseText
+                    );
+
+                }
+
+            });
+
+        }
 
         function atualizarPontos() {
 
@@ -392,15 +588,49 @@
             const pontosB =
                 document.getElementById("pontosB").value;
 
-            const status =
-                document.getElementById("statusJogo").value;
 
+            fetch("endpoint.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
 
-            document.getElementById("mensagem").innerText =
-                "Pontos atualizados com sucesso! " +
-                "Time A " + pontosA +
-                " x " + pontosB +
-                " Time B.";
+                body:
+                    "op=atualizarJogo" +
+                    "&idJogo=" + jogoSelecionado +
+                    "&pontos_time_casa=" + pontosA +
+                    "&pontos_time_fora=" + pontosB
+            })
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    if (data.sucesso) {
+
+                        document.getElementById("mensagem").innerText =
+                            "Pontos atualizados com sucesso! " +
+                            "Time A " + pontosA +
+                            " x " + pontosB +
+                            " Time B.";
+
+                    } else {
+
+                        document.getElementById("mensagem").innerText =
+                            "Erro ao atualizar os pontos.";
+
+                    }
+
+                })
+
+                .catch(erro => {
+
+                    document.getElementById("mensagem").innerText =
+                        "Erro ao atualizar os pontos.";
+
+                    console.error(erro);
+
+                });
 
         }
 
@@ -414,26 +644,107 @@
 
             if (confirmar) {
 
-                document.getElementById("statusJogo").value =
-                    "finalizado";
+                fetch("endpoint.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+
+                    body:
+                        "op=finalizarJogo" +
+                        "&idJogo=" + jogoSelecionado
+                })
+
+                    .then(response => response.json())
+
+                    .then(data => {
+
+                        if (data.sucesso) {
+
+                            document.getElementById("mensagem").innerText =
+                                "Jogo finalizado com sucesso!";
+
+                            document.getElementById("pontosA").disabled =
+                                true;
+
+                            document.getElementById("pontosB").disabled =
+                                true;
+
+                        } else {
+
+                            document.getElementById("mensagem").innerText =
+                                "Erro ao finalizar o jogo.";
+
+                        }
+
+                    })
+
+                    .catch(erro => {
+
+                        document.getElementById("mensagem").innerText =
+                            "Erro ao finalizar o jogo.";
+
+                        console.error(erro);
+
+                    });
+
+            }
+
+        }
 
 
-                document.getElementById("mensagem").innerText =
-                    "Jogo finalizado com sucesso!";
+        function iniciarJogo() {
+
+            const confirmar = confirm(
+                "Tem certeza que deseja iniciar este jogo?"
+            );
 
 
-                document.getElementById("pontosA").disabled =
-                    true;
+            if (confirmar) {
 
-                document.getElementById("pontosB").disabled =
-                    true;
+                fetch("endpoint.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+
+                    body:
+                        "op=iniciarJogo" +
+                        "&idJogo=" + jogoSelecionado
+                })
+
+                    .then(response => response.json())
+
+                    .then(data => {
+
+                        if (data.sucesso) {
+
+                            document.getElementById("mensagem").innerText =
+                                "Jogo iniciado com sucesso!";
+
+                        } else {
+
+                            document.getElementById("mensagem").innerText =
+                                "Erro ao iniciar o jogo.";
+
+                        }
+
+                    })
+
+                    .catch(erro => {
+
+                        document.getElementById("mensagem").innerText =
+                            "Erro ao iniciar o jogo.";
+
+                        console.error(erro);
+
+                    });
 
             }
 
         }
 
     </script>
-
 
 </body>
 
